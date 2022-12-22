@@ -10,7 +10,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.davidorellana.logincomposeretrofit2.ui.login.components.*
 
@@ -44,7 +46,11 @@ fun LoginScreen(
             onNext = { focusManager.moveFocus(FocusDirection.Down) }
         )
         if (!messageErrorAuth.equals("")){
-            Text(text = messageErrorAuth.toString())
+            Text(
+                text = messageErrorAuth.toString(),
+                color = Color.Red,
+                textAlign = TextAlign.Left,
+            )
             Spacer(modifier = modifier.height(10.dp))
         }
 

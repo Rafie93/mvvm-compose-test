@@ -17,9 +17,7 @@ import com.netwerk.salttest.viewmodel.LoginViewModel
 @Composable
 fun NavigationScreen(viewModel: LoginViewModel) {
     val navController = rememberNavController()
-    val loadingProgressBar = viewModel.progressBar.value
     val imageError = viewModel.imageErrorAuth.value
-    val messageErrorAuth = viewModel.messageErrorAuth.value
 
     NavHost(
         navController = navController,
@@ -36,11 +34,12 @@ fun NavigationScreen(viewModel: LoginViewModel) {
                 }
             }
             else {
+
                 LoginScreen(
-                    loadingProgressBar = loadingProgressBar,
+                    loadingProgressBar = viewModel.progressBar.value,
                     onclickLogin = viewModel::loginUser,
                     imageError = imageError,
-                    messageErrorAuth = messageErrorAuth,
+                    messageErrorAuth = viewModel.messageErrorAuth.value,
                 )
             }
         }
