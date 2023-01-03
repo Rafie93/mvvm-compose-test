@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.netwerk.salttest.data.helper.Constant
-import com.netwerk.salttest.data.methods.UserApi
+import com.netwerk.salttest.data.methods.Api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -45,7 +45,7 @@ object ApiClient {
         retrofit = builder.client(okHttpClient).build()
     }
 
-    fun getAuthService() : UserApi {
-        return retrofit.create(UserApi::class.java)
+    fun service() : Api {
+        return retrofit.create(Api::class.java)
     }
 }

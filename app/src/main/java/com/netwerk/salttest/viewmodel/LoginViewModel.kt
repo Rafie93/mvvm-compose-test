@@ -27,9 +27,9 @@ class LoginViewModel: ViewModel()  {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 progressBar.value = true
-                val authService = ApiClient.getAuthService()
+                val authService = ApiClient.service()
                 val responseService = authService.loginUser(LoginRequest(email = email, password = password))
-                Log.d("Logging", "Code "+responseService.code().toString())
+//                Log.d("Logging", "Code "+responseService.code().toString())
 
                 if (responseService.code()==200){
                     isSuccessLoading.value = true

@@ -1,43 +1,50 @@
 package com.netwerk.salttest.ui.login
 
 
-import android.util.Log
-import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.davidorellana.logincomposeretrofit2.ui.login.components.*
+import com.netwerk.salttest.R
+import com.netwerk.salttest.ui.components.TextError
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
     loadingProgressBar: Boolean,
     onclickLogin: (email: String, password: String) -> Unit,
-    imageError: Boolean,
     messageErrorAuth: String?
 ) {
-    var email by rememberSaveable { mutableStateOf(value = "") }
+    var email by rememberSaveable { mutableStateOf(value = "eve.holt@reqres.in") }
     var password by rememberSaveable { mutableStateOf(value = "") }
     val isValidate by derivedStateOf { email.isNotBlank() && password.isNotBlank() }
     val focusManager = LocalFocusManager.current
 
     Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ImageLogin()
+        Image(
+            painter = painterResource(id = R.drawable.ic_image_login),
+            contentDescription = "Image Login",
+            modifier = modifier
+                .fillMaxWidth()
+                .size(300.dp),
+            alignment = Alignment.Center
+        )
 
-        TextLogin()
-
-        Spacer(modifier = modifier.height(15.dp))
+        Spacer(modifier = modifier.height(65.dp))
 
         EmailOutTextField(
             textValue = email,
@@ -46,12 +53,7 @@ fun LoginScreen(
             onNext = { focusManager.moveFocus(FocusDirection.Down) }
         )
         if (!messageErrorAuth.equals("")){
-            Text(
-                text = messageErrorAuth.toString(),
-                color = Color.Red,
-                textAlign = TextAlign.Left,
-            )
-            Spacer(modifier = modifier.height(10.dp))
+            TextError(text = messageErrorAuth.toString())
         }
 
         Spacer(modifier = modifier.height(15.dp))
@@ -66,16 +68,16 @@ fun LoginScreen(
 
         Spacer(modifier = modifier.height(35.dp))
 
-        ButtonLogin(
+        ButtonRound(
             onclick = { onclickLogin(email, password) },
-            enabled = isValidate
+            enabled = isValidate,
+            text = "LOGIN"
         )
 
 
         Spacer(modifier = modifier.height(20.dp))
     }
 
-    ErrorImageAuth(isImageValidate = imageError)
 
     ProgressBarLoading(isLoading = loadingProgressBar)
 }

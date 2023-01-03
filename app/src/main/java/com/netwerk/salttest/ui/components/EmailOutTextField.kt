@@ -29,7 +29,7 @@ fun EmailOutTextField(
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp),
         label = { Text(text = "Email") },
-        placeholder = { Text(text = "eve.holt@reqres.in") },
+        placeholder = { Text(text = "") },
         trailingIcon = {
             IconButton(
                 onClick = onClickButton

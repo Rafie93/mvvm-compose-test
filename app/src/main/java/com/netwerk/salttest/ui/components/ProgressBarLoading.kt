@@ -18,13 +18,13 @@ fun ProgressBarLoading(
             modifier = modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.85f),
-            verticalArrangement = Arrangement.Bottom,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CircularProgressIndicator(
-                color = Color.Blue,
+                color = Color.Red,
                 strokeWidth = 5.dp,
-                modifier = modifier.size(60.dp)
+                modifier = modifier.size(40.dp)
             )
         }
     }
